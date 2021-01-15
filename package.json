@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.6",
     "@babel/core": "^7.12.3",
     "@babel/preset-react": "^7.10.4",
     "@fullcalendar/common": "^5.4.0",

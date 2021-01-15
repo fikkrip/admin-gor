@@ -7,8 +7,7 @@ import dynamic from "next/dynamic";
 import Router from "next/router";
 import dayjs from "dayjs";
 import withApollo from "../libs/withApollo";
-import { ApolloProvider } from '@apollo/client';
-
+import { ApolloProvider } from "react-apollo";
 
 const TopProgressBar = dynamic(
   () => {
@@ -20,7 +19,7 @@ const TopProgressBar = dynamic(
 class App extends MyApp {
   render() {
     const { Component, pageProps, apolloClient } = this.props;
-
+    console.log(this.props);
     return (
       <ApolloProvider client={apolloClient}>
         <TopProgressBar />

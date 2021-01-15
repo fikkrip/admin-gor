@@ -1,0 +1,396 @@
+$theme-light-background: #F7F8FC;
+$theme-light-boxshadow:0px 0px 8px 0px rgba(0,0,0,0.1);
+$theme-light-color:#78828A;
+$theme-light-bodyColor:#ffffff;
+$theme-light-sideBackground:#ffffff;
+$theme-light-sidebartext: #78828A;
+$theme-light-navbarBrand: #ffffff;
+$theme-light-sidebarActive: #D9FCED;
+$theme-light-sidebarActiveColor: #0DAA66;
+$theme-light-sidebarBadge: $primary;
+$theme-light-navbarLink: #707070;
+$theme-light-themegreen: $darkgreen;
+$theme-light-chatBubbles: #fafafa;
+$theme-light-profitCount: #2C82BE;
+$theme-light-orderCount: #FF5F74;
+$theme-light-rejectedCount: #5A107A;
+$theme-light-emptyBar: #F3F3FB;
+$theme-light-filledBar: #55BFA3;  
+$theme-light-border-color: rgb(242, 242, 242);
+$theme-light-commonBtn: #F8F8FA;
+
+$theme-dark-background: #292E33;
+$theme-dark-boxshadow:0 0px 0px 0  $black;
+$theme-dark-color: $white;
+$theme-dark-bodyColor:#16191C;
+$theme-dark-sideBackground:#1F2327;
+$theme-dark-button-custom: $purple;
+$theme-dark-sidebartext: #748AA1;
+$theme-dark-cardHeader: #fff;
+$theme-dark-loginBg:#383C4F;
+$theme-dark-navbarBrand: #191B1D;
+$theme-dark-sidebarActiveColor: $white;
+$theme-dark-navbarLink: #717D88;
+$theme-dark-paginationBg: #29CB97;
+$theme-dark-orderCount: #FEC400;
+$theme-dark-rejectedCount: #4072EE;
+$theme-dark-emptyBar: #3F464E;
+$theme-dark-border-color: #33393F;
+// $theme-dark-myTxtBg:#E9EBEE;
+// $theme-dark-myTxtColor:#5B626B;
+
+
+
+
+$themes: (
+  light: (
+    borderColor:$theme-light-border-color,
+    backgroundColor: $theme-light-background,
+    boxShadow: $theme-light-boxshadow,
+    textColor:$theme-light-color,
+    bodyColor:$theme-light-bodyColor,
+    sidebarBackground:$theme-light-sideBackground,
+    sidebartext:$theme-light-sidebartext,
+    headerBackground:$theme-light-background,
+    cardHeader: $theme-light-color,
+    loginBg:$theme-light-background,
+    navbarBrand: $theme-light-navbarBrand,
+    sidebarActive: $theme-light-sidebarActive,
+    sidebarActiveColor: $theme-light-sidebarActiveColor,
+    sidebarBadge: $theme-light-sidebarBadge,
+    sidebarBadgeColor: $theme-light-background,
+    btnCustom: $theme-light-sideBackground,
+    navbarLink: $theme-light-navbarLink,
+    chatHeader: $theme-light-sideBackground,
+    // myTxtBg: $theme-light-bodyColor,
+    // myTxttext: $theme-light-color,
+    // frndTxtBg:$theme-light-sideBackground,
+    // frndTxttext: $theme-light-background,
+    chatBubbles: $theme-light-chatBubbles,
+    sendMEssage: $theme-light-chatBubbles,
+    chatActive: $theme-light-sideBackground,
+    timelineTime: $theme-light-themegreen,
+    paginationBg: $theme-light-themegreen,
+    profitCount: $theme-light-profitCount,
+    orderCount: $theme-light-orderCount,
+    rejectedCount:$theme-light-rejectedCount,
+    emptyBar: $theme-light-emptyBar,
+    filledBar: $theme-light-filledBar,
+    saleCount: $theme-light-sidebarBadge,
+    visitorProgress: $theme-light-sidebarBadge,
+    commonBtn: $theme-light-commonBtn,
+  ),
+
+  dark: (
+    backgroundColor: $theme-dark-background,
+    boxShadow: $theme-dark-boxshadow,
+    textColor:$theme-dark-color,
+    bodyColor:$theme-dark-bodyColor,
+    sidebarBackground:$theme-dark-sideBackground,
+    sidebartext:$theme-dark-sidebartext,
+    headerBackground:$theme-dark-sideBackground,
+    cardHeader: $theme-dark-cardHeader,
+    loginBg:$theme-dark-loginBg,
+    navbarBrand: $theme-dark-navbarBrand,
+    sidebarActive: $theme-dark-button-custom,
+    sidebarActiveColor: $theme-dark-sidebarActiveColor,
+    sidebarBadge: $theme-dark-sidebarActiveColor,
+    sidebarBadgeColor: $theme-dark-button-custom,
+    btnCustom: $theme-dark-button-custom,
+    navbarLink: $theme-dark-navbarLink,
+    timelineTime: $theme-dark-sidebartext,
+    paginationBg: $theme-dark-paginationBg,
+    profitCount: $theme-dark-paginationBg,
+    orderCount: $theme-dark-orderCount,
+    rejectedCount: $theme-dark-rejectedCount,
+    emptyBar: $theme-dark-emptyBar,
+    filledBar: $theme-dark-rejectedCount,
+    saleCount: $theme-dark-sidebartext,
+    visitorProgress: $theme-dark-rejectedCount,
+    borderColor:$theme-dark-border-color,
+    commonBtn: $theme-dark-bodyColor,
+    chatBubbles: $theme-dark-bodyColor,
+    // myTxtBg: $theme-dark-myTxtBg,
+    // myTxttext: $theme-dark-myTxtColor,
+    // frndTxtBg:$theme-light-sideBackground,
+    // frndTxttext: $theme-light-background,
+    chatHeader: $theme-dark-sideBackground,
+    
+),
+);
+
+/*
+ * Implementation of themes
+ */
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+/*
+ * Actual styles for the app
+ */
+.theme-background{
+  @include themify($themes) {
+    background: themed('backgroundColor') !important ; 
+  }
+}
+header{
+  @include themify($themes) {
+    box-shadow: none !important ; 
+  }
+}
+.card, .custom-calender, .dropdown-menu, .chat-page, .setting-child, .vertical-stats .whiteBg{
+  @include themify($themes) {
+    background: themed('backgroundColor') ; 
+  }
+  @include themify($themes) {
+    box-shadow: themed('boxShadow') !important ; 
+  }
+  .card-header, .card-footer{
+    @include themify($themes) {
+      background: themed('backgroundColor'); 
+    }
+  }
+}
+
+.theme-shadow{
+  @include themify($themes) {
+    box-shadow: themed('boxShadow') !important ; 
+  }
+}
+.theme-color,p,.text-sm,.task-wrapper small, .table th, .table td, .fa-ellipsis-h, .deal .cmn-btn, .text-md, h1, h2, h3, h4, h5, .form-label, .form-check-label,
+.timeline small, .workprogress-tab a, .breadcrumb-item a, .email-container .breadcrumb-item::before, .form-control-plaintext, .vertical-stats p,
+.email-container a, .contact-details .fa, .contact-details a, .project-tab a, .rc-calendar-date,.rc-calendar-column-header-inner, .Cards .card-title,.list-group .list-group-item{
+  @include themify($themes) {
+   color: themed('textColor') !important ; 
+  }
+}
+ 
+body{
+  @include themify($themes) {
+    background: themed('bodyColor') !important ; 
+  }
+}
+.card-header{
+  @include themify($themes) {
+    color: themed('cardHeader') !important ;
+  }
+}
+.sidebar, .header-dark{
+  @include themify($themes) {
+    background: themed('sidebarBackground') !important ; 
+    color: themed('sidebartext') !important;
+  }
+}
+.sidebartext a{
+  @include themify($themes) {
+    color: themed('sidebartext') !important;
+  }
+}
+.sidebar a.nav-link.active, .sidebar-contents .dropdown-item.active{
+  @include themify($themes) {
+    color: themed('sidebarActiveColor') !important;
+  }
+  @include themify($themes) {
+    background: themed('sidebarActive') !important;
+  }
+}
+.sidebar a.nav-link, .child-nav-list .nav-link, .child-nav-list.dropdown-item{
+  &:hover{
+    @include themify($themes) {
+      color: themed('sidebarActiveColor') !important;
+    }
+    @include themify($themes) {
+      background: themed('sidebarActive') !important;
+    }
+  }
+}
+.sidebar-contents{
+  .nav-link.active{
+      .badge{
+        @include themify($themes) {
+          background: themed('sidebarBadge') !important;
+          color: themed('sidebarBadgeColor') !important;
+        }
+      }
+    }
+  }
+
+.sidebar .navbar-brand{
+  @include themify($themes) {
+    background: themed('navbarBrand') !important;
+  }
+}
+.sidebar .nav-link.active {
+  @include themify($themes) {
+    background: themed('sidebarActive') !important;
+  }
+}
+.sidebar-contents .dropdown-menu .dropdown-item, .child-nav-list .nav-link{
+  &:hover{
+    @include themify($themes) {
+      background: themed('sidebarActive') !important;
+    }
+  }
+}
+.headerbg{
+  @include themify($themes) {
+    background: themed('headerBackground') !important ; 
+  }
+}
+.loginBg{
+  @include themify($themes) {
+    background: themed('loginBg') !important ; 
+  }
+
+}
+.btn-custom{
+  @include themify($themes) {
+    background: themed('btnCustom') !important ; 
+  }
+}
+.custom-navbar .nav-link, .custom-navbar-search button, .setting .fa, .fa-bars, .custom-navbar .fa-search, .layout-3 header .fa {
+  @include themify($themes) {
+    color: themed('navbarLink') !important ; 
+  }
+}
+// .custom-navbar .custom-navbar-search input,  .mail-search input{
+//   @include themify($themes) {
+//     background: themed('searchInput') !important ; 
+//   }
+// }
+.chatbar{
+  @include themify($themes) {
+    background: themed('chatBg') !important ; 
+  }
+}
+// .my-text p{
+//   @include themify($themes) {
+//     background: themed('myTxtBg') !important ; 
+//     color: themed('myTxttext') !important ; 
+//   }
+// }
+// .friend-text p{
+//   @include themify($themes) {
+//     background: themed('frndTxtBg') !important ; 
+//     color: themed('frndTxttext') !important ; 
+//   }
+// }
+
+// .message-input input::placeholder{
+//   @include themify($themes) {
+//     color: themed('sendInput') !important ; 
+//   }
+// }
+.chatHeader{
+  @include themify($themes) {
+    background: themed('chatHeader') !important ;
+    color: $white;
+  }
+}
+.chat-bubbles, .message-input, .chat-header{
+  @include themify($themes) {
+    background: themed('chatBubbles') !important ;
+  }
+  @include themify($themes) {
+    box-shadow: themed('boxShadow') !important ; 
+  }
+
+}
+.nav-pills .nav-link.active{
+.profile-img{
+  @include themify($themes) {
+    border-right: 2px solid themed('chatActive') !important ;
+  }
+}
+}
+.custom-timeline{
+  .time{
+    @include themify($themes) {
+      color: themed('timelineTime') !important ;
+    }
+  }
+}
+
+  .pagination{
+    .page-link{
+      @include themify($themes) {
+        background: themed('paginationBg') !important ;
+      }
+    }
+  }
+
+.weeklyreport-table{
+  .profit-count{
+    @include themify($themes) {
+      color: themed('profitCount') !important ;
+    }
+  }
+  .order-count{
+    @include themify($themes) {
+      color: themed('orderCount') !important ;
+    }
+  }
+  .rejected-count{
+    @include themify($themes) {
+      color: themed('rejectedCount') !important ;
+    }
+  }
+}
+.weekyreport-bar{
+  .empty-bar{
+    @include themify($themes) {
+      fill: themed('emptyBar') !important;
+    }
+  }
+  .filled-bar{
+    @include themify($themes) {
+      fill: themed('filledBar') !important;
+    }
+  }
+}
+.salecount{
+  @include themify($themes) {
+    color: themed('saleCount') !important;
+  }
+}
+.vistorstats{
+  .progress-bar{
+    @include themify($themes) {
+      background: themed('visitorProgress') !important;
+    }
+  }
+}
+.deal{
+  .cmn-btn{
+    @include themify($themes) {
+      background: themed('commonBtn') !important;
+    }
+  }
+}
+$badge-color: #626DD4 !important;
+
+.borderColor, td, tr, th, .list-group-item{
+  @include themify($themes) {
+    border-color: themed('borderColor') !important;
+  }
+  
+}
+
+.card-header{
+  @extend .borderColor;
+}

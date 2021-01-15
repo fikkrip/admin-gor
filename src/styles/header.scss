@@ -1,0 +1,59 @@
+.color-setting{
+    height: 20px;
+    border: 1px solid rgba(72, 94, 144, 0.16);
+    display: flex;
+    margin-bottom: 5px;
+    padding: 2px;
+    &.light{
+        span{
+            &:first-child{
+             background: rgb(51, 53, 71) !important;
+            }
+            background: rgb(255, 255, 255) !important;
+            
+        }
+    }
+    span{
+        display: block;
+        flex: 1;
+    }
+    &.dark{
+        span{
+            &:first-child{
+             background: #1F2327 !important;
+            }
+            background: #16191C !important;
+            
+        }
+    }
+}
+.horizontal{
+    .sidebar-contents{
+        flex-direction: column;
+    }
+}
+.vertical{
+    header{
+        width:100% !important;
+    }
+    .sidebar-contents {
+        a{
+            i{
+                display:none;
+            }
+        }
+    }
+}
+.light{
+    .sidebar-contents{
+        flex-direction: column;
+    }
+}
+header{
+    background-color: transparent;
+    height:70px;
+    .navbar{
+        height: inherit;
+    }
+   
+}
